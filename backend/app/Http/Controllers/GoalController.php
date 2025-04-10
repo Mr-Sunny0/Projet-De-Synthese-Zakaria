@@ -11,7 +11,13 @@ class GoalController extends Controller
         return response()->json(Goal::all());  /// returns the Goal table to the front end
     }
     public function store(request $request){
-        Goal::create($request->all());    /// stores data in the Goal table
+        Goal::create([
+            "price" => $request->price ,
+            "months" => $request->months ,
+            // "category"=> $request->category ,
+            "date" => $request->date ,
+            "user_id" => auth()->id() , //this will determine the user id based on the provided token 
+         ]);
     }
 
 }

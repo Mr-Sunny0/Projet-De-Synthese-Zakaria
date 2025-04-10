@@ -7,7 +7,7 @@ export default function Sidebar(){
         <div className="navigation">
         <ul>
           <li>
-            <a href="/">
+            <a href="#">
               <span className="icon">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
                 <span className="material-symbols-outlined">monetization_on</span>
@@ -17,7 +17,7 @@ export default function Sidebar(){
           </li>
 
           <li>
-            <a href="/">
+            <a href="/Dashboard">
               <span className="icon">
                 <span className="material-symbols-outlined">dashboard</span>
               </span>
@@ -25,16 +25,16 @@ export default function Sidebar(){
             </a>
           </li>
           <li>
-            <a href="/">
+            <a href="/Goal">
               <span className="icon">
                 <span className="material-symbols-outlined">receipt_long</span>
               </span>
-              <span className="title">Transactions</span>
+              <span className="title">Goals</span>
             </a>
           </li>
 
           <li>
-            <a href="/">
+            <a href="/Income">
               <span className="icon">
                 <span className="material-symbols-outlined">trending_up</span>
               </span>
@@ -43,7 +43,7 @@ export default function Sidebar(){
           </li>
 
           <li>
-            <a href="/">
+            <a href="/Expense">
               <span className="icon">
                 <span className="material-symbols-outlined">trending_down</span>
               </span>
