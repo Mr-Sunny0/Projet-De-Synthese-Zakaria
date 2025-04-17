@@ -27,10 +27,19 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 // Route::post('/PostGoal', [GoalController::class , "store"]); // will recieve a json and store in the database 
 
 Route::middleware('auth:sanctum')->group(function () {
+    ////Income routes
     Route::post('/PostIncome', [IncomeController::class , "store"]);
     Route::get('/GetIncome', [IncomeController::class , "index"]);
+    Route::delete('/DeleteIncome/{id}' , [IncomeController::class , "destroy"]);
+    Route::put('UpdateIncome/{id}' ,[IncomeController::class , "update"] ) ;
+    ///Expense routes 
     Route::get('/GetExpense', [ExpenseController::class , "index"]);  
     Route::post('/PostExpense', [ExpenseController::class , "store"]);
+    Route::delete('/DeleteExpense/{id}', [ExpenseController::class , "destroy"]);  
+    Route::put('/UpdateExpense/{id}', [ExpenseController::class , "update"]);
+    ///Goal routes
     Route::get('/GetGoal', [GoalController::class , "index"]);
     Route::post('/PostGoal', [GoalController::class , "store"]);
+    Route::delete('/DeleteGoal/{id}', [GoalController::class , "destroy"]);
+
 });

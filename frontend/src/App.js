@@ -1,6 +1,7 @@
 import './App.css';
-import { useState , useEffect } from 'react';
-import Sidebar from "./components/Sidebare";
+import { useState  } from 'react';
+import Sidebar from './components/layout/Sidebar';
+import Header from './components/layout/Header';
 import Income from './components/Income';
 import Expense from './components/Expense';
 import Goal from './components/Goal';
@@ -11,14 +12,29 @@ import {BrowserRouter , Routes, Route , Navigate} from "react-router-dom";
 import { createContext } from 'react';
 export const mycontext = createContext()
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('token'));
-  const [user, setUser] = useState(localStorage.getItem('user'));
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  
+  // State to manage sidebar visibility
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Function to open the sidebar
+  const openSidebar = () => {
+    setIsSidebarOpen(true);
+  };
+
+  // Function to close the sidebar
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
   <mycontext.Provider value={{token , setToken ,user , setUser}}>
-    <div className="container">
+    <div className="grid-container">
       <BrowserRouter>
-       {token ? <Sidebar /> : null}            {/* // this will check if the token exists , if it does then return the sidebar */}
-       <div className="main-content">
+       {token ? <Header onMenuClick={openSidebar} /> : null}
+       {token ? <Sidebar sidebarOpen={isSidebarOpen} closeSidebar={closeSidebar} /> : null}       {/* // this will check if the token exists , if it does then return the sidebar */}
+       <div className="main-container">
        <Routes>
        {/* Public Routes */}
           <Route path="/" element={token ? <Navigate to="/Dashboard"/> : <Loginpage />} />

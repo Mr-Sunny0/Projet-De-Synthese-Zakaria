@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create("Goals" , function(blueprint $table){
             $table->id();
+            $table->String("name");
             $table->integer("price") ;
             $table->integer("months");
+            $table->integer("monthly_target");
             $table->foreignid("user_id")->constrained()->ondelete("cascade");
             $table->date("date")->default(now());
             $table->timestamps(); // 👈 THIS adds created_at and updated_at
