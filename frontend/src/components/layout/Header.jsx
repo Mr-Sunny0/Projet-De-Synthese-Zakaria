@@ -5,7 +5,8 @@ function Header({ onMenuClick }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user } = useContext(mycontext);           //access the token stored in mycontext
   // Test user data
-  const userdata = JSON.parse(user)
+  // const userdata = JSON.parse(user)
+  const userdata = typeof user === 'string' ? JSON.parse(user) : user;
   const currentUser = {
     name: userdata.name,
     email: userdata.email,
