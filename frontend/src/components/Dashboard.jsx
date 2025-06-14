@@ -9,6 +9,8 @@ export default function Dashboard() {
 const {token} = useContext(mycontext)
 const [sampleIncomeData, setIncomeData] = useState([]);
 const [sampleExpenseData, setExpenseData] = useState([]);
+const [activeGoals, setactiveGoals] = useState([]);
+
 const [loading, setLoading] = useState(true);
 
 useEffect(() => {
@@ -20,13 +22,14 @@ useEffect(() => {
         Authorization: `Bearer ${token}`,
       };
 
-      const [incomeRes, expenseRes] = await Promise.all([
+      const [incomeRes, expenseRes , goalRes] = await Promise.all([
         axios.get('http://localhost:8000/api/GetIncome', { headers }),
         axios.get('http://localhost:8000/api/GetExpense', { headers }),
+        axios.get('http://localhost:8000/api/GetGoal', { headers })
       ]);
-
       setIncomeData(incomeRes.data);
       setExpenseData(expenseRes.data);
+      setactiveGoals(goalRes.data.length)
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
@@ -45,7 +48,6 @@ if (loading) return <div className="p-4">Loading...</div>;
 const totalIncome = sampleIncomeData.reduce((sum, item) => sum + item.amount, 0);
 const totalExpenses = sampleExpenseData.reduce((sum, item) => sum + item.amount, 0);
 const balance = totalIncome - totalExpenses;
-const activeGoals = 3;
 
 // Expenses by Category for Donut Chart
 const expensesByCategory = sampleExpenseData.reduce((acc, item) => {
